@@ -12,7 +12,7 @@ namespace ConsoleApp
             Console.Title = "Inventory Management System (Developed by Waqar Kabir)";
             Console.ForegroundColor = ConsoleColor.Black;
             Console.BackgroundColor = ConsoleColor.White;
-            CategoryRepository<Category> categoryRepository = new CategoryRepository<Category>();
+            GenericRepository<Category> categoryRepository = new GenericRepository<Category>();
             
             Product[] products = new Product[100];
             int categoryIndex = 0;

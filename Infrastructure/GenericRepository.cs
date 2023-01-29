@@ -7,15 +7,12 @@ using System.Threading.Tasks;
 
 namespace Infrastructure
 {
-    public class BaseEntity
-    {
-        public int Id { get; set; }
-    }
-    public class CategoryRepository<T> where T : IBaseEntity
+    
+    public class GenericRepository<T> where T : IBaseEntity
     {
         private readonly List<T> collection;
 
-        public CategoryRepository()
+        public GenericRepository()
         {
             collection = new List<T>();
         }
