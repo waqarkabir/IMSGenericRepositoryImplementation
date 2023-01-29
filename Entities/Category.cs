@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class Category
+    public class Category: IBaseEntity
     {
         private static int index = 1;
         private string _name;
@@ -16,7 +16,6 @@ namespace Entities
 
         public Category()
         {
-            
             EnteredOn = DateTime.Now;
         }
         public Category(string name, string description):this()
@@ -25,15 +24,15 @@ namespace Entities
             Description = description;
             Id = index;
             index = index + 1;
-
         }
 
-        public Category(string name, string description, string updatedBy):this()
+        public Category(int id, string name, string description, string updatedBy):this()
         {
             Name = name;
             Description = description;
             UpdatedOn = DateTime.Now;
             UpdatedBy = updatedBy;
+            Id = id;
         }
         public int Id { get; set; }
 
@@ -56,7 +55,7 @@ namespace Entities
             {
                 if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentNullException(value, "Name and description can't be null");
+                    throw new ArgumentNullException(value, "Name  can't be null");
                 }
                 _name = value;
             }
@@ -69,7 +68,7 @@ namespace Entities
             {
                 if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentNullException(value,"Name and description can't be null");
+                    throw new ArgumentNullException(value,"Description can't be null");
                 }
                 _description = value;
             }

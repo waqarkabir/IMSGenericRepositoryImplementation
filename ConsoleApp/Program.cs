@@ -142,10 +142,10 @@ namespace ConsoleApp
                                 Console.WriteLine("Enter New Category Description");
 
                                 description = Console.ReadLine();
-                                category = new Category(name,description, updatedBy);
+                                category = new Category(Convert.ToInt32(searchIndex) , name,description, updatedBy);
 
 
-                                categoryRepository.Update(category, p=>p.Id == category.Id);
+                                categoryRepository.Update(searchIndex,category);
 
                                 Console.WriteLine("Category Updated");
                                 Console.ReadKey();

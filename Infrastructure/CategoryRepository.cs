@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace Infrastructure
 {
-    public class CategoryRepository<T> where T : class
+    public class BaseEntity
+    {
+        public int Id { get; set; }
+    }
+    public class CategoryRepository<T> where T : IBaseEntity
     {
         private readonly List<T> collection;
 
@@ -20,16 +24,18 @@ namespace Infrastructure
         {
             collection.Add(item);
         }
+        //Through Reflections
+        //public T GetCategoryById(int Id)
+        //{
 
+        //    var nameProp = typeof(T).GetProperty("Id");
+        //    var result = collection.Where(x => nameProp.GetValue(x).Equals(Id));
+        //    return result.FirstOrDefault();
+        //}
         public T GetCategoryById(int Id)
         {
-            T item = null;
-            foreach (var collectionItem in collection)
-            {
-                item = collectionItem;
-                break;
-            }
-            return item;
+            
+            return collection.Find(p=>p.Id == Id);
         }
 
         public IEnumerable<T> List()
@@ -40,11 +46,12 @@ namespace Infrastructure
         {
             collection.Remove(item);
         }
-        public void Update(T item, Predicate<T> predicate)
+        public void Update(int id, T item)
         {
-            int index = collection.FindIndex(predicate);
-            if (index >= 0)
+            T entity = collection.FirstOrDefault(e=>e.Id == id);
+            if (entity != null)
             {
+                int index = collection.IndexOf(entity);
                 collection[index] = item;
             }
         }
